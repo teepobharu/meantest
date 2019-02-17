@@ -1,0 +1,17 @@
+@import './variables';
+@import './mixins';
+
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+
+body { //from variables.scss
+    font: 100%;
+    color: red;
+}
+
+.sass {
+    background: blue;
+}
+
+.sass  h2{
+    color: red;
+}

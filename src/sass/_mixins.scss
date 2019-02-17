@@ -1,0 +1,90 @@
+//... Mixins create group for REUSE
+
+@mixin transform($property) {
+    -webkit-transform: $property;
+    -ms-transform: $property;
+    transform: $property;
+}
+    //Call mixins using @include
+.box { @include transform(rotate(30deg)); }
+//Variables 
+@mixin padding($values...) {    
+    @each $var in $values {
+        padding: #{$var};
+    }
+}
+a {
+    @include padding(2px 4px 6px);
+}
+/* MIXINS : VARIABLE ARGUMENTS SCHEMA ====
+$style1: 100%, 70px, #fo6d06;
+$style2: (background: #bada55, width: 100%, height: 100px);
+
+@mixin box($width, $height, $background) {
+    width: $width;
+    height: $height;
+    background-color: $background;
+}
+
+.fogdog {
+    @include box($style1...);
+}
+
+.badass {
+    @include box($style2...);
+}
+*////////////////////////// END OF MIXINS///////////
+
+///... Extends / Inheritance
+
+  /* This CSS will print because %message-shared is extended. */
+%message-shared {
+    border: 1px solid #ccc;
+    padding: 10px;
+    color: #333;
+}
+  
+  // This CSS won't print because %equal-heights is never extended.
+%equal-heights {
+    display: flex;
+    flex-wrap: wrap;
+}
+  
+.message {
+    @extend %message-shared;
+}
+  
+.success {
+    @extend %message-shared;
+    border-color: green;
+}
+
+//Nesting
+
+nav {
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+  
+    li { display: inline-block; }
+  
+    a {
+      display: block;
+      padding: 6px 12px;
+      text-decoration: none;
+    }
+  }
+
+  //... Operator
+
+article[role="main"] {
+    float: left;
+    width: 600px / 960px * 100%;
+}
+  
+aside[role="complementary"] {
+    float: right;
+    width: 300px / 960px * 100%;
+}

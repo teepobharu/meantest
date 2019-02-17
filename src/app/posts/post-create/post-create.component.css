@@ -1,0 +1,8 @@
+mat-card {
+    border: 1px solid red;
+}
+
+mat-form-field,
+textarea {
+    width: 100%;
+}

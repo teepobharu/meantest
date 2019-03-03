@@ -39,4 +39,10 @@ app.use((req, res, next) => {
 app.use("/api/posts", postsRoutes);
 app.use("/api/user", userRoutes);
 
+//DEPLOY
+app.use(express.static(__dirname + '/dist/meantest'));
+app.get('/*', (req, res) => {
+    res.sendFile(path.join(__dirname + '/dist/meantest/index.html'));
+});
+
 module.exports = app;

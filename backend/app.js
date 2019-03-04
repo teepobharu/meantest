@@ -21,7 +21,7 @@ mongoose
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use("/images", express.static(path.join("backend/images")));
+app.use("/images", express.static(path.join(__dirname, "backend/images")));
 
 app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
@@ -40,9 +40,9 @@ app.use("/api/posts", postsRoutes);
 app.use("/api/user", userRoutes);
 
 //DEPLOY
-app.use(express.static(__dirname + '/dist/meantest'));
+app.use(express.static(path.join(__dirname, '../dist/meantest')));
 app.get('/*', (req, res) => {
-    res.sendFile(path.join(__dirname + '/dist/meantest/index.html'));
+    res.sendFile(path.join(__dirname, '../dist/meantest/index.html'));
 });
 
 module.exports = app;

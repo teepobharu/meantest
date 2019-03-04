@@ -18,7 +18,7 @@ export class PostsService {
     getPosts(postsPerPage: number, currentPage: number) {
         const queryParams = `?pageSize=${postsPerPage}&page=${currentPage}`;
         this.http
-            .get<{ message: string, posts: any, maxPosts: number }>('BACKEND_URL"+"/posts' + queryParams
+            .get<{ message: string, posts: any, maxPosts: number }>(BACKEND_URL + '/posts' + queryParams
             )
             .pipe(
                 map((postData) => {
@@ -52,7 +52,7 @@ export class PostsService {
             content: string;
             imagePath: string;
             creator: string;
-        }>('BACKEND_URL"+"/posts/' + id);
+        }>('./posts/' + id);
     }
     getPostUpdateListener() {
         return this.postsUpdated.asObservable();
@@ -65,7 +65,7 @@ export class PostsService {
         postData.append("image", image, title);
         this.http
             .post<{ message: string, post: Post }>(
-                'BACKEND_URL"+"/posts',
+                BACKEND_URL + '/posts',
                 postData
             )
             .subscribe((responseData) => {
@@ -90,7 +90,7 @@ export class PostsService {
             };
         }
         this.http
-            .put("BACKEND_URL" + "/posts/" + id, postData)
+            .put(BACKEND_URL + "/posts/" + id, postData)
             .subscribe(response => {
                 console.log(response);
 
@@ -98,6 +98,6 @@ export class PostsService {
 
     }
     deletePost(postId: string) {
-        return this.http.delete("BACKEND_URL" + "/posts/" + postId);
+        return this.http.delete(BACKEND_URL + "/posts/" + postId);
     }
 }

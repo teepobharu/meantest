@@ -53,7 +53,7 @@ export class PostsService {
             imagePath: string;
             creator: string;
             //BACKEND
-        }>('api/posts/' + id);
+        }>(BACKEND_URL + '/posts/' + id);
     }
     getPostUpdateListener() {
         return this.postsUpdated.asObservable();
@@ -67,7 +67,7 @@ export class PostsService {
         this.http
             .post<{ message: string, post: Post }>(
                 //BACKEND
-                '/api/posts',
+                BACKEND_URL + '/posts',
                 postData
             )
             .subscribe((responseData) => {

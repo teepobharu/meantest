@@ -52,7 +52,7 @@ export class PostsService {
             content: string;
             imagePath: string;
             creator: string;
-        }>('./posts/' + id);
+        }>('/posts/' + id);
     }
     getPostUpdateListener() {
         return this.postsUpdated.asObservable();
@@ -65,7 +65,7 @@ export class PostsService {
         postData.append("image", image, title);
         this.http
             .post<{ message: string, post: Post }>(
-                BACKEND_URL + '/posts',
+                'posts',
                 postData
             )
             .subscribe((responseData) => {

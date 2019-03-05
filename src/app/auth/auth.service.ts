@@ -29,6 +29,7 @@ export class AuthService {
         return this.isAuthenticated;
     }
     getUserId() {
+        console.log(this.userId);
         return this.userId;
     }
     createUser(email: string, password: string) {
@@ -42,6 +43,7 @@ export class AuthService {
         const authData: AuthData = { email: email, password: password };
         this.http.post<{ token: string; expiresIn: number, userId: string }>(BACKEND_URL + "/user/login", authData)
             .subscribe(response => {
+                console.log(response);
                 const token = response.token;
                 this.token = token;
                 if (token) {
@@ -102,7 +104,7 @@ export class AuthService {
         localStorage.removeItem("userId");
     }
     private getAuthData() {
-        const token = localStorage.getItem("token ");
+        const token = localStorage.getItem("token");
         const expirationDate = localStorage.getItem("expiration");
         const userId = localStorage.getItem("userId");
         if (!token || !expirationDate) {

@@ -91,7 +91,7 @@ router.get("", (req, res, next) => {
     const currentPage = +req.query.page;
     const postQuery = Post.find();
     let fetchPosts;
-    console.log(req.query);
+    //console.log(req.query);
     if (pageSize && currentPage) {
         postQuery
             .skip(pageSize * (currentPage - 1))
@@ -123,7 +123,7 @@ router.get("/:id", (req, res, next) => {
 
 router.delete("/:id", checkAuth, (req, res, next) => {
     Post.deleteOne({ _id: req.params.id, creator: req.userData.userId }).then(result => {
-        console.log("Delete result", result);
+        //console.log("Delete result", result);
         if (result.nModified > 0) {
             res.status(200).json({ message: "Delete successfully" });
         }

@@ -56,12 +56,12 @@ router.post('/login', (req, res, next) => {
             );
             //token console.error();
 
-            console.log("Here is the : " + token);
+            //console.log("Here is the : " + token);
             res.status(200).json({
                 token: token,
                 //Use in front endsend back as a number in seconds until expire
                 expiresIn: 3600,
-                userId: fetchedUser._Id
+                userId: fetchedUser._id
             });
 
         })

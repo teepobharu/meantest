@@ -6,7 +6,7 @@ const config = require("./config");
 const postsRoutes = require("./routes/posts");
 const userRoutes = require("./routes/user");
 const app = express();
-console.log(process.env.NODE_ENV);
+// console.log(process.env.NODE_ENV);
 mongoose
     .connect(
         "mongodb+srv://admin:admin@cluster0-uicrg.mongodb.net/node-angular?retryWrites=true", { useNewUrlParser: true }

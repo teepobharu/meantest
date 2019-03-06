@@ -95,6 +95,7 @@ export class PostsService {
             .put(BACKEND_URL + "/posts/" + id, postData)
             .subscribe(response => {
                 console.log(response);
+                this.router.navigate(["/"]);
 
             });
 

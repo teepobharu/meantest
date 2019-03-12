@@ -5,22 +5,24 @@ const path = require("path");
 const config = require("./config");
 const postsRoutes = require("./routes/posts");
 const userRoutes = require("./routes/user");
+const dbug = require("debug")("app");
 
 const app = express();
 
-console.log("Process env: " + config.env);
-console.log(config);
+dbug("Process env: %o" + config.env);
+dbug(config);
+const dbstr = process.env.MONGO_ATLAS || config.db.host;
+
 mongoose
-    //"mongodb+srv://admin:admin@cluster0-uicrg.mongodb.net/node-angular?retryWrites=true"
     // config.db.host, { useNewUrlParser: true }
     .connect(
-        process.env.MONGO_ATLAS, { useNewUrlParser: true }
+        dbstr, { useNewUrlParser: true }
     )
     .then(() => {
-        console.log("Connected to database!");
+        dbug("Connected to database!");
     })
     .catch((err) => {
-        console.log("Connection failed!", err);
+        dbug("Connection failed! %o", err);
     });
 
 app.use(bodyParser.json());

@@ -11,8 +11,10 @@ const app = express();
 console.log("Process env: " + config.env);
 console.log(config);
 mongoose
+    //"mongodb+srv://admin:admin@cluster0-uicrg.mongodb.net/node-angular?retryWrites=true"
+    // config.db.host, { useNewUrlParser: true }
     .connect(
-        config.db.host, { useNewUrlParser: true }
+        process.env.MONGO_ATLAS, { useNewUrlParser: true }
     )
     .then(() => {
         console.log("Connected to database!");

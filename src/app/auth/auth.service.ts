@@ -34,10 +34,16 @@ export class AuthService {
     }
     createUser(email: string, password: string) {
         const authData: AuthData = { email: email, password: password };
-        this.http.post(BACKEND_URL + "/user/signup", authData)
+        return this.http.post(BACKEND_URL + "/user/signup", authData)
             .subscribe(result => {
+                this.router.navigate['/'];
                 console.log(result);
-            })
+            },
+                (error) => {
+                    this.authStatusListener.next(false);
+                    console.log(error);
+                }
+            )
     }
     login(email: string, password: string) {
         const authData: AuthData = { email: email, password: password };
@@ -59,7 +65,11 @@ export class AuthService {
                     console.log(expirationDate);
                     this.router.navigate(['/']);
                 }
-            })
+            },
+                error => {
+                    this.authStatusListener.next(false);
+                    console.log(error);
+                });
     }
     autoAuthUser() {
         const authInformation = this.getAuthData();

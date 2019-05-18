@@ -1,7 +1,10 @@
 mat-card {
     border: 1px solid grey;
 }
-
+.panel-body{
+    text-align:center;
+    margin: 1em auto;
+}
 mat-form-field,
 textarea {
     width: 100%;

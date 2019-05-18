@@ -1,8 +1,20 @@
-<mat-spinner *ngIf="isLoading"></mat-spinner>
+<mat-card-header>
+  Welcome to Bloggy...
+</mat-card-header>
+<mat-spinner style="margin:0 auto;" *ngIf="isLoading"></mat-spinner>
 <mat-accordion multi="true" *ngIf="posts.length > 0 && !isLoading">
-  <mat-expansion-panel *ngFor="let post of posts">
+  <mat-expansion-panel style="margin: 1em auto;" #panel *ngFor="let post of posts">
     <mat-expansion-panel-header>
-      {{post.title}}
+      <ng-container *ngIf="!panel.expanded">
+        <span class="list-title">{{post.title}}</span>
+        <span class="list-content">{{post.content}}</span>
+      </ng-container>
+      <!-- <pre>
+        ----
+        {{post.title}} 
+        Creator: {{post.creator}} userId: {{userId}} 
+        Status: {{post.creator===userId}}
+      </pre> -->
     </mat-expansion-panel-header>
     <div class="post-image">
       <img [src]="post.imagePath" [alt]="post.title">

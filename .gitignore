@@ -4,7 +4,9 @@
 
 /tmp
 /out-tsc
-
+/meanapi
+/dist
+*/NOCARE
 # dependencies
 /node_modules
 

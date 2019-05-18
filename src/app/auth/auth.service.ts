@@ -3,6 +3,9 @@ import { HttpClient } from "@angular/common/http";
 import { AuthData } from './auth-data.model';
 import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
+import { environment } from '../../environments/environment';
+
+const BACKEND_URL = environment.apiUrl;
 
 @Injectable({ providedIn: "root" })
 export class AuthService {
@@ -26,19 +29,30 @@ export class AuthService {
         return this.isAuthenticated;
     }
     getUserId() {
+        console.log(this.userId);
         return this.userId;
     }
     createUser(email: string, password: string) {
         const authData: AuthData = { email: email, password: password };
-        this.http.post("http://localhost:3000/api/user/signup", authData)
+        return this.http.post(BACKEND_URL + "/user/signup", authData)
             .subscribe(result => {
+                console.log("SUCCESS result");
+                this.router.navigateByUrl('/');
                 console.log(result);
-            })
+            },
+                (error) => {
+                    console.log("error result");
+                    this.router.navigate['/'];
+                    this.authStatusListener.next(false);
+                    console.log(error);
+                }
+            )
     }
     login(email: string, password: string) {
         const authData: AuthData = { email: email, password: password };
-        this.http.post<{ token: string; expiresIn: number, userId: string }>("http://localhost:3000/api/user/login", authData)
+        this.http.post<{ token: string; expiresIn: number, userId: string }>(BACKEND_URL + "/user/login", authData)
             .subscribe(response => {
+                console.log(response);
                 const token = response.token;
                 this.token = token;
                 if (token) {
@@ -54,7 +68,11 @@ export class AuthService {
                     console.log(expirationDate);
                     this.router.navigate(['/']);
                 }
-            })
+            },
+                error => {
+                    this.authStatusListener.next(false);
+                    console.log(error);
+                });
     }
     autoAuthUser() {
         const authInformation = this.getAuthData();
@@ -99,7 +117,7 @@ export class AuthService {
         localStorage.removeItem("userId");
     }
     private getAuthData() {
-        const token = localStorage.getItem("token ");
+        const token = localStorage.getItem("token");
         const expirationDate = localStorage.getItem("expiration");
         const userId = localStorage.getItem("userId");
         if (!token || !expirationDate) {

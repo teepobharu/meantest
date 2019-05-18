@@ -5,6 +5,8 @@ import { ActivatedRoute, ParamMap } from "@angular/router";
 import { PostsService } from "../posts.service";
 import { Post } from "../post.model";
 import { mimeType } from "./mime-type.validator";
+import { Subscription } from 'rxjs';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
     selector: "app-post-create",
@@ -20,13 +22,22 @@ export class PostCreateComponent implements OnInit {
     imagePreview: string;
     private mode = "create";
     private postId: string;
-
+    private authStatusSub: Subscription;
+    public fail = false;
     constructor(
         public postsService: PostsService,
-        public route: ActivatedRoute
+        public route: ActivatedRoute,
+        public authService: AuthService
     ) { }
 
     ngOnInit() {
+        this.authStatusSub = this.authService
+            .getAuthStatusListener()
+            .subscribe(
+                authStatus => {
+                    this.isLoading = false;
+                }
+            );
         this.form = new FormGroup({
             title: new FormControl(null, {
                 validators: [Validators.required, Validators.minLength(3)]
@@ -63,7 +74,9 @@ export class PostCreateComponent implements OnInit {
             }
         });
     }
-
+    ngOnDestroy() {
+        this.authStatusSub.unsubscribe();
+    }
     onImagePicked(event: Event) {
         const file = (event.target as HTMLInputElement).files[0];
         this.form.patchValue({ image: file });
@@ -77,8 +90,10 @@ export class PostCreateComponent implements OnInit {
 
     onSavePost() {
         if (this.form.invalid) {
+            this.fail = true;
             return;
         }
+        this.fail = false;
         this.isLoading = true;
         if (this.mode === "create") {
             this.postsService.addPost(

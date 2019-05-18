@@ -15,3 +15,23 @@
     width: 100%;
     box-shadow: 1px 1px 1px rgba(0,0,0,0.5);
 }
+.list-title{
+    padding-right: 0.5em; overflow:hidden;
+    color: salmon;
+    text-overflow: ellipsis;
+    display:inline-block;
+    font-weight: 300px;
+}
+.list-content{
+    display:inline-block; 
+    white-space:pre;
+    margin-left: auto;
+    overflow:hidden;
+    max-width: 100%;
+    text-align:right;
+    word-break: break-all;
+    display:inline-block; 
+    text-overflow: ellipsis;
+    padding-left: 2em;
+    padding-right:1em;
+}

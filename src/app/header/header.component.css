@@ -5,6 +5,11 @@ ul {
 }
 a{
     text-decoration: none;
+    margin: 0 0.5em;
+    border: 1px solid white;
+}
+a.hover:not(.mat-accent):hover{
+    color: lightblue;
 }
 .spacer {
     flex: 1 1 auto;

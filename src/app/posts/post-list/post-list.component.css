@@ -12,6 +12,7 @@
     width: 100%;
 }
 .post-image img {
+    text-align:center;
     width: 100%;
     box-shadow: 1px 1px 1px rgba(0,0,0,0.5);
 }
@@ -34,4 +35,8 @@
     text-overflow: ellipsis;
     padding-left: 2em;
     padding-right:1em;
+}
+.image{
+    max-width: 400px;
+    max-height: 400px;
 }

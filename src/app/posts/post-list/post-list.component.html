@@ -5,8 +5,8 @@
 <mat-accordion multi="true" *ngIf="posts.length > 0 && !isLoading">
   <mat-expansion-panel style="margin: 1em auto;" #panel *ngFor="let post of posts">
     <mat-expansion-panel-header>
+      <span class="list-title">{{post.title}}</span>
       <ng-container *ngIf="!panel.expanded">
-        <span class="list-title">{{post.title}}</span>
         <span class="list-content">{{post.content}}</span>
       </ng-container>
       <!-- <pre>

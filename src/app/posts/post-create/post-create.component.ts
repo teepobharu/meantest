@@ -23,7 +23,7 @@ export class PostCreateComponent implements OnInit {
     private mode = "create";
     private postId: string;
     private authStatusSub: Subscription;
-
+    public fail = false;
     constructor(
         public postsService: PostsService,
         public route: ActivatedRoute,
@@ -90,8 +90,10 @@ export class PostCreateComponent implements OnInit {
 
     onSavePost() {
         if (this.form.invalid) {
+            this.fail = true;
             return;
         }
+        this.fail = false;
         this.isLoading = true;
         if (this.mode === "create") {
             this.postsService.addPost(

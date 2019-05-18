@@ -23,3 +23,4 @@ router.get("/:id", PostsController.getPost);
 router.delete("/:id", checkAuth, PostsController.deletePost);
 
 module.exports = router;
+

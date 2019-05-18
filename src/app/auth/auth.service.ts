@@ -36,10 +36,13 @@ export class AuthService {
         const authData: AuthData = { email: email, password: password };
         return this.http.post(BACKEND_URL + "/user/signup", authData)
             .subscribe(result => {
-                this.router.navigate['/'];
+                console.log("SUCCESS result");
+                this.router.navigateByUrl('/');
                 console.log(result);
             },
                 (error) => {
+                    console.log("error result");
+                    this.router.navigate['/'];
                     this.authStatusListener.next(false);
                     console.log(error);
                 }

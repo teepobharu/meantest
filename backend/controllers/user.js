@@ -51,7 +51,7 @@ exports.userLogin = (req, res, next) => {
             if (!result) {
                 return res.status(401).json({
                     message: "Auth failed"
-                })
+                });
             }
             const token = jwt.sign(
                 { email: fetchedUser.email, userId: fetchedUser._id }, 'secret_this_should_be_longer',
@@ -69,9 +69,9 @@ exports.userLogin = (req, res, next) => {
 
         })
         .catch(error => {
-            console.log(error);
+            // console.log(error);
             return res.status(401).json({
                 message: "Authorized Login failed"
-            })
+            });
         });
 }

@@ -30,7 +30,7 @@
     "body-parser": "^1.18.3",
     "bootstrap": "^4.2.1",
     "core-js": "^2.5.4",
-    "express": "^4.16.4",
+    "express": "^4.17.3",
     "jsonwebtoken": "^8.5.0",
     "mongoose": "^5.4.8",
     "mongoose-unique-validator": "^2.0.2",
